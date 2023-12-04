@@ -23,7 +23,7 @@
         -->
         <createTable tableName="clients">
             <column name="id" type="int" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false" primaryKeyName="pk_product_id"/>
+                <constraints primaryKey="true" nullable="false" primaryKeyName="pk_client_id"/>
             </column>
             <column name="surname" type="varchar(32)">
                 <constraints nullable="false" unique="false"/>
@@ -55,9 +55,6 @@
                 columnNames="passport_series, passport_number"
                 constraintName="passport_sn"
                 tableName="clients"/>
-        <!--primaryKeyName="pk_passport_sn"-->
-        <addPrimaryKey tableName="clients" columnNames="passport_series, passport_number"
-                       constraintName="pk_passport_sn"/>
     </changeSet>
 
 </databaseChangeLog>
