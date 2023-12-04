@@ -22,7 +22,7 @@
                 * interest_rate - процентная ставка
                 * disbursement_datetime - дата выдачи кредита
         -->
-        <createTable tableName="agreement">
+        <createTable tableName="agreements">
             <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
