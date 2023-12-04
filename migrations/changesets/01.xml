@@ -29,7 +29,7 @@
                 <constraints primaryKey="true" nullable="false" primaryKeyName="pk_product_id"/>
             </column>
             <column name="code" type="varchar(32)">
-                <constraints nullable="false" unique="true" uniquieConstraintName="uk_product_code"/>
+                <constraints nullable="false" unique="true"/>
             </column>
             <column name="title" type="varchar(255)">
                 <constraints nullable="false"/>
@@ -66,7 +66,7 @@
         <addUniqueConstraint
                 columnNames="title, version"
                 constraintName="uk_product_title_version"
-                tableName="product"/>
+                tableName="products"/>
     </changeSet>
 
 </databaseChangeLog>
