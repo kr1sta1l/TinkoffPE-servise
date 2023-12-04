@@ -24,7 +24,7 @@
                 * min_origination - минимальная сумма комиссии за выдачу кредита
                 * max_origination - максимальная сумма комиссии за выдачу кредита
                 -->
-        <createTable tableName="product">
+        <createTable tableName="products">
             <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" primaryKeyName="pk_product_id"/>
             </column>
