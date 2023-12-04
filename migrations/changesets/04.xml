@@ -1,0 +1,52 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+    <changeSet author="kr1sta1l" id="create-payment-schedule-table">
+        <!--Таблица расписания оплаты(payment_schedule)-->
+        <!--Столбцы:
+                * agreement_id - идентификатор договора
+                * planned_payment_date - дата планируемого платежа
+                * real_payment_date - дата фактического платежа
+                * principle_payment - сумма платежа по основному долгу
+                * interest_payment - сумма платежа по процентам
+                * status - статус платежа
+                * payment_number - номер платежа
+                * paid_sum - сумма оплаченного платежа
+        -->
+        <createTable tableName="payment_schedule">
+            <column name="agreement_id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+                <foreignKey name="fk_product_code" references="product(code)"/>
+            </column>
+            <column name="planned_payment_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="real_payment_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="principle_payment" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="interest_payment" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="payment_number" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="paid_sum" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
