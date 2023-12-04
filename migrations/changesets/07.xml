@@ -1,0 +1,50 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+
+    <changeSet author="kr1sta1l" id="add-indexes-to-payment-schedule-table">
+        <!--Индекс по id договора для ускорения выборки по договору-->
+        <createIndex indexName="agreement_id_idx" tableName="payment_schedule">
+            <column name="agreement_id"/>
+        </createIndex>
+
+        <!--Индекс по дате планируемого платежа для ускорения выборки по дате планируемого платежа-->
+        <createIndex indexName="planned_payment_date_idx" tableName="payment_schedule">
+            <column name="planned_payment_date"/>
+        </createIndex>
+
+        <!--Индекс по дате фактического платежа для ускорения выборки по дате фактического платежа-->
+        <createIndex indexName="real_payment_date_idx" tableName="payment_schedule">
+            <column name="real_payment_date"/>
+        </createIndex>
+
+        <!--Индекс по сумме платежа по основному долгу для ускорения выборки по сумме платежа по основному долгу-->
+        <createIndex indexName="principle_payment_idx" tableName="payment_schedule">
+            <column name="principle_payment"/>
+        </createIndex>
+
+        <!--Индекс по сумме платежа по процентам для ускорения выборки по сумме платежа по процентам-->
+        <createIndex indexName="interest_payment_idx" tableName="payment_schedule">
+            <column name="interest_payment"/>
+        </createIndex>
+
+        <!--Индекс по статусу для ускорения выборки по статусу-->
+        <createIndex indexName="payment_number_idx" tableName="payment_schedule">
+            <column name="payment_number"/>
+        </createIndex>
+
+        <!--Индекс по номеру платежа для ускорения выборки по номеру платежа-->
+        <createIndex indexName="paid_sum_idx" tableName="payment_schedule">
+            <column name="paid_sum"/>
+        </createIndex>
+    </changeSet>
+
+
+</databaseChangeLog>
