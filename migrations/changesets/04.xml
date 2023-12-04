@@ -22,8 +22,7 @@
         -->
         <createTable tableName="payment_schedule">
             <column name="agreement_id" type="int">
-                <constraints primaryKey="true" nullable="false"/>
-                <foreignKey name="fk_product_code" references="product(code)"/>
+                <constraints nullable="false" foreignKeyName="fk_agreement_id" references="agreements(id)"/>
             </column>
             <column name="planned_payment_date" type="datetime">
                 <constraints nullable="false"/>
