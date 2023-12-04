@@ -1,0 +1,61 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+    <changeSet author="kr1sta1l" id="create-agreement-table">
+        <!--Таблица соглашений(agreement)-->
+        <!--Столбцы:
+                * id - идентификатор соглашения
+                * product_code - код продукта
+                * client_id - идентификатор клиента
+                * create_datetime - дата создания соглашения
+                * status - статус соглашения
+                * principle_amount - сумма основного долга
+                * term - срок кредита
+                * origination_amount - сумма комиссии за выдачу кредита
+                * interest_rate - процентная ставка
+                * disbursement_datetime - дата выдачи кредита
+        -->
+        <createTable tableName="agreement">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="product_code" type="varchar(32)">
+                <constraints nullable="false"/>
+                <foreignKey name="fk_product_code" references="product(code)"/>
+            </column>
+            <column name="client_id" type="int">
+                <constraints nullable="false"/>
+                <foreignKey name="fk_customer_id" references="clients(id)"/>
+            </column>
+            <column name="create_datetime" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="principle_amount" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="term" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="origination_amount" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="interest_rate" type="decimal(5,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="disbursement_datetime" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
