@@ -1,0 +1,35 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+    <changeSet author="kr1sta1l" id="add-indexes-to-clients-table">
+        <!--Индекс по серии паспорта для ускорения поиска клиента по номеру паспорта-->
+        <createIndex indexName="passport_series_idx" tableName="clients">
+            <column name="passport_series"/>
+        </createIndex>
+
+        <!--Индекс по номеру паспорта для ускорения поиска клиента по номеру паспорта-->
+        <createIndex indexName="passport_number_idx" tableName="clients">
+            <column name="passport_number"/>
+        </createIndex>
+
+        <!--Индекс по номеру телефона для ускорения поиска клиента по номеру телефона-->
+        <createIndex indexName="phone_number_idx" tableName="clients">
+            <column name="phone_number"/>
+        </createIndex>
+
+        <!--Индекс по месячному доходу для ускорения поиска клиента по месячному доходу-->
+        <createIndex indexName="monthly_income_idx" tableName="clients">
+            <column name="monthly_income"/>
+        </createIndex>
+    </changeSet>
+
+
+
+</databaseChangeLog>
