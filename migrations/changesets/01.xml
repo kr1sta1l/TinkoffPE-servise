@@ -43,10 +43,10 @@
             <column name="max_principle" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="min_term" type="decimal(5,2)">
+            <column name="min_term" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="max_term" type="decimal(5,2)">
+            <column name="max_term" type="int">
                 <constraints nullable="false"/>
             </column>
             <column name="min_interest" type="decimal(5,2)">
