@@ -1,0 +1,32 @@
+<!--Idk why it doesn't work with yaml...-->
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+    <changeSet author="kr1sta1l" id="load-data-to-products-table">
+        <loadData file="data/products.csv"
+                        separator=","
+                        tableName="products">
+            <column name="id" type="INT"/>
+            <column name="code" type="STRING"/>
+            <column name="title" type="STRING"/>
+            <column name="version" type="STRING"/>
+            <column name="min_principle" type="INT"/>
+            <column name="max_principle" type="INT"/>
+            <column name="min_term" type="INT"/>
+            <column name="max_term" type="INT"/>
+            <column name="min_interest" type="FLOAT"/>
+            <column name="max_interest" type="FLOAT"/>
+            <column name="min_origination" type="INT"/>
+            <column name="max_origination" type="INT"/>
+        </loadData>
+    </changeSet>
+
+</databaseChangeLog>
+
