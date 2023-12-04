@@ -1,0 +1,63 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+    <changeSet author="kr1sta1l" id="create-client-table">
+        <!--Таблица клиентов(client)-->
+        <!--Столбцы:
+                * id - идентификатор клиента
+                * surname - фамилия
+                * name - имя
+                * patronymic - отчество
+                * age - возраст
+                * phone_number - номер телефона
+                * passport_series - серия паспорта
+                * passport_number - номер паспорта
+                * monthly_income - месячный доход
+        -->
+        <createTable tableName="clients">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="pk_product_id"/>
+            </column>
+            <column name="surname" type="varchar(32)">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="name" type="varchar(32)">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="patronymic" type="varchar(32)">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="age" type="int">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="phone_number" type="int">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="passport_series" type="varchar(4)">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="passport_number" type="varchar(6)">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="monthly_income" type="int">
+                <constraints nullable="false" unique="false"/>
+            </column>
+        </createTable>
+
+        <addUniqueConstraint
+                columnNames="passport_series, passport_number"
+                constraintName="passport_sn"
+                tableName="clients"/>
+        <!--primaryKeyName="pk_passport_sn"-->
+        <addPrimaryKey tableName="clients" columnNames="passport_series, passport_number"
+                       constraintName="pk_passport_sn"/>
+    </changeSet>
+
+</databaseChangeLog>
