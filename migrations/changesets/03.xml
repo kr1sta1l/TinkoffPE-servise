@@ -22,17 +22,17 @@
                 * interest_rate - процентная ставка
                 * disbursement_datetime - дата выдачи кредита
         -->
-        <createTable tableName="agreements">
+        <createTable tableName="agreement">
             <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="product_code" type="varchar(32)">
-                <constraints nullable="false" foreignKeyName="fk_product_code" references="products(code)"/>
+                <constraints nullable="false" foreignKeyName="fk_product_code" references="product(code)"/>
             </column>
             <column name="client_id" type="int">
-                <constraints nullable="false" foreignKeyName="fk_customer_id" references="clients(id)"/>
+                <constraints nullable="false" foreignKeyName="fk_customer_id" references="client(id)"/>
             </column>
-            <column name="create_datetime" type="datetime">
+            <column name="create_datetime" type="timestamptz">
                 <constraints nullable="false"/>
             </column>
             <column name="status" type="int">
@@ -50,8 +50,8 @@
             <column name="interest_rate" type="decimal(5,2)">
                 <constraints nullable="false"/>
             </column>
-            <column name="disbursement_datetime" type="datetime">
-                <constraints nullable="false"/>
+            <column name="disbursement_datetime" type="timestamptz">
+                <constraints nullable="true"/>
             </column>
         </createTable>
     </changeSet>
