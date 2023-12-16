@@ -21,7 +21,7 @@
                 * passport_number - номер паспорта
                 * monthly_income - месячный доход
         -->
-        <createTable tableName="clients">
+        <createTable tableName="client">
             <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" primaryKeyName="pk_client_id"/>
             </column>
@@ -40,21 +40,13 @@
             <column name="phone_number" type="int">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="passport_series" type="varchar(4)">
-                <constraints nullable="false" unique="false"/>
-            </column>
-            <column name="passport_number" type="varchar(6)">
-                <constraints nullable="false" unique="false"/>
+            <column name="passport_id" type="varchar(32)">
+                <constraints nullable="false" unique="true"/>
             </column>
             <column name="monthly_income" type="int">
                 <constraints nullable="false" unique="false"/>
             </column>
         </createTable>
-
-        <addUniqueConstraint
-                columnNames="passport_series, passport_number"
-                constraintName="passport_sn"
-                tableName="clients"/>
     </changeSet>
 
 </databaseChangeLog>
