@@ -1,2 +1,2 @@
-id,code,title,version,min_principle,max_principle,min_term,max_term,min_interest,max_interest,min_origination,max_origination
-1,CL_1.0,Cash Loan,1.0,50000,500000,3,24,8,15,2000,10000
+code,title,version,min_principle,max_principle,min_term,max_term,min_interest,max_interest,min_origination,max_origination
+CL_1.0,Cash Loan,1.0,50000,500000,3,24,8,15,2000,10000
