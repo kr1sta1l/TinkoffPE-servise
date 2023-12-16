@@ -12,19 +12,7 @@
     <changeSet author="kr1sta1l" id="load-data-to-products-table">
         <loadData file="data/products.csv"
                         separator=","
-                        tableName="products">
-            <column name="id" type="INT"/>
-            <column name="code" type="STRING"/>
-            <column name="title" type="STRING"/>
-            <column name="version" type="STRING"/>
-            <column name="min_principle" type="INT"/>
-            <column name="max_principle" type="INT"/>
-            <column name="min_term" type="INT"/>
-            <column name="max_term" type="INT"/>
-            <column name="min_interest" type="FLOAT"/>
-            <column name="max_interest" type="FLOAT"/>
-            <column name="min_origination" type="INT"/>
-            <column name="max_origination" type="INT"/>
+                        tableName="product">
         </loadData>
     </changeSet>
 
