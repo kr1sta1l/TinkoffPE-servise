@@ -11,22 +11,22 @@
 
     <changeSet author="kr1sta1l" id="add-indexes-to-agreement-table">
         <!--Индекс по id клиента для ускорения выборки по клиенту-->
-        <createIndex indexName="client_id_idx" tableName="agreements">
+        <createIndex indexName="client_id_idx" tableName="agreement">
             <column name="client_id"/>
         </createIndex>
 
         <!--Индекс по статусу для ускорения выборки при поиске активных соглашений-->
-        <createIndex indexName="status_idx" tableName="agreements">
+        <createIndex indexName="status_idx" tableName="agreement">
             <column name="status"/>
         </createIndex>
 
         <!--Индекс по дате создания для ускорения выборки при поиске активных соглашений-->
-        <createIndex indexName="create_datetime_idx" tableName="agreements">
+        <createIndex indexName="create_datetime_idx" tableName="agreement">
             <column name="create_datetime"/>
         </createIndex>
 
         <!--Индекс по дате выдачи для ускорения выборки при поиске активных соглашений-->
-        <createIndex indexName="disbursement_datetime_idx" tableName="agreements">
+        <createIndex indexName="disbursement_datetime_idx" tableName="agreement">
             <column name="disbursement_datetime"/>
         </createIndex>
     </changeSet>
