@@ -15,8 +15,8 @@
                 * code - код продукта
                 * title - название продукта
                 * version - версия продукта (title + version - уникальное сочетание)
-                * min_principle - минимальная сумма кредита
-                * max_principle - максимальная сумма кредита
+                * min_principle - минимальная сумма кредита (до 99 999 999,99 - кто знает, вдруг )
+                * max_principle - максимальная сумма кредита (до 99 999 999,99)
                 * min_term - минимальный срок кредита
                 * max_term - максимальный срок кредита
                 * min_interest - минимальная процентная ставка
@@ -24,7 +24,7 @@
                 * min_origination - минимальная сумма комиссии за выдачу кредита
                 * max_origination - максимальная сумма комиссии за выдачу кредита
                 -->
-        <createTable tableName="products">
+        <createTable tableName="product">
             <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" primaryKeyName="pk_product_id"/>
             </column>
@@ -37,10 +37,10 @@
             <column name="version" type="varchar(32)">
                 <constraints nullable="false"/>
             </column>
-            <column name="min_principle" type="int">
+            <column name="min_principle" type="decimal(10,2)">
                 <constraints nullable="false"/>
             </column>
-            <column name="max_principle" type="int">
+            <column name="max_principle" type="decimal(10,2)">
                 <constraints nullable="false"/>
             </column>
             <column name="min_term" type="int">
@@ -66,7 +66,7 @@
         <addUniqueConstraint
                 columnNames="title, version"
                 constraintName="uk_product_title_version"
-                tableName="products"/>
+                tableName="product"/>
     </changeSet>
 
 </databaseChangeLog>
