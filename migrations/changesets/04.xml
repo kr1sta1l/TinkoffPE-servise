@@ -22,12 +22,12 @@
         -->
         <createTable tableName="payment_schedule">
             <column name="agreement_id" type="int">
-                <constraints nullable="false" foreignKeyName="fk_agreement_id" references="agreements(id)"/>
+                <constraints nullable="false" foreignKeyName="fk_agreement_id" references="agreement(id)"/>
             </column>
-            <column name="planned_payment_date" type="datetime">
+            <column name="planned_payment_date" type="timestamptz">
                 <constraints nullable="false"/>
             </column>
-            <column name="real_payment_date" type="datetime">
+            <column name="real_payment_date" type="timestamptz">
                 <constraints nullable="false"/>
             </column>
             <column name="principle_payment" type="int">
