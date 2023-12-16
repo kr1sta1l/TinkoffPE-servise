@@ -9,23 +9,13 @@
         http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
 
     <changeSet author="kr1sta1l" id="add-indexes-to-clients-table">
-        <!--Индекс по серии паспорта для ускорения поиска клиента по номеру паспорта-->
-        <createIndex indexName="passport_series_idx" tableName="clients">
-            <column name="passport_series"/>
-        </createIndex>
-
-        <!--Индекс по номеру паспорта для ускорения поиска клиента по номеру паспорта-->
-        <createIndex indexName="passport_number_idx" tableName="clients">
-            <column name="passport_number"/>
-        </createIndex>
-
-        <!--Индекс по номеру телефона для ускорения поиска клиента по номеру телефона-->
-        <createIndex indexName="phone_number_idx" tableName="clients">
-            <column name="phone_number"/>
+        <!--Индекс по серии паспорта для ускорения поиска клиента по серии и номеру паспорта-->
+        <createIndex indexName="passport_id_idx" tableName="client">
+            <column name="passport_id"/>
         </createIndex>
 
         <!--Индекс по месячному доходу для ускорения поиска клиента по месячному доходу-->
-        <createIndex indexName="monthly_income_idx" tableName="clients">
+        <createIndex indexName="monthly_income_idx" tableName="client">
             <column name="monthly_income"/>
         </createIndex>
     </changeSet>
