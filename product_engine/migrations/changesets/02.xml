@@ -37,13 +37,13 @@
             <column name="age" type="int">
                 <constraints nullable="false" unique="false"/>
             </column>
-            <column name="phone_number" type="int">
+            <column name="phone_number" type="varchar(32)">
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="passport_id" type="varchar(32)">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="monthly_income" type="int">
+            <column name="monthly_income" type="double">
                 <constraints nullable="false" unique="false"/>
             </column>
         </createTable>
