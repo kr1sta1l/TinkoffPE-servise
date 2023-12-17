@@ -10,6 +10,11 @@
 
 
     <changeSet author="kr1sta1l" id="add-indexes-to-agreement-table">
+        <!--Индекс по коду продукта для ускорения выборки по продукту-->
+        <createIndex indexName="product_code_idx" tableName="agreement">
+            <column name="product_code"/>
+        </createIndex>
+
         <!--Индекс по id клиента для ускорения выборки по клиенту-->
         <createIndex indexName="client_id_idx" tableName="agreement">
             <column name="client_id"/>
