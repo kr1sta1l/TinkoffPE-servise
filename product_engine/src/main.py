@@ -1,4 +1,3 @@
-import logging
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import Response
 from pydantic import ValidationError
@@ -33,6 +32,10 @@ async def validation_exception_handler(request, exc):
 
 @app.get("/product")
 async def get_products() -> list[ProductDto]:
+    """
+    Получение списка продуктов
+    :return: список продуктов
+    """
     products = await repository.get_all(ProductDao)
     return [ProductDto.from_dao(product) for product in products]
 
@@ -40,6 +43,11 @@ async def get_products() -> list[ProductDto]:
 @app.get("/product/{product_code}", responses={404: {"description": "Product not found"},
                                                200: {"description": "Product found"}})
 async def get_product_by_code(product_code: str):
+    """
+    Получение продукта по коду
+    :param product_code: код продукта
+    :return: 200 - продукт найден (тело ответа - данные продукта), 404 - продукт не найден
+    """
     product = await repository.get_one_by_expression(ProductDao, ProductDao.code == product_code)
     if not product:
         return Response(status_code=404)
@@ -49,7 +57,12 @@ async def get_product_by_code(product_code: str):
 @app.post("/product", responses={400: {"description": "Invalid product data"},
                                  409: {"description": "Product already exists",
                                        200: {"description": "Product created"}}})
-async def create_product(product: ProductDto):
+async def create_product(product: ProductDto) -> Response:
+    """
+    Создание продукта
+    :param product: данные продукта
+    :return: 200 - продукт создан, 400 - некорректный формат данных, 409 - продукт уже существует
+    """
     db_product = await repository.get_one_by_expression(ProductDao, ProductDao.code == product.code)
     db_title_version = await repository.get_one_by_expression(ProductDao, (ProductDao.title == product.title) and (
             ProductDao.version == product.version))
@@ -62,19 +75,29 @@ async def create_product(product: ProductDto):
 
 
 @app.delete("/product/{product_code}", responses={404: {"description": "Product not found"},
-                                                  200: {"description": "Product deleted"}})
-async def delete_product(product_code: str):
+                                                  204: {"description": "Product deleted"}})
+async def delete_product(product_code: str) -> Response:
+    """
+    Удаление продукта по коду
+    :param product_code: код продукта
+    :return: 204 - продукт удален, 404 - продукт не найден
+    """
     product = (await repository.get_one_by_expression(ProductDao, ProductDao.code == product_code))
     if not product:
         return Response(status_code=404)
     await repository.delete(product)
-    return Response(status_code=200)
+    return Response(status_code=204)
 
 
 @app.post("/agreement", responses={400: {"description": "Invalid agreement data"},
                                    409: {"description": "Agreement already exists",
                                          200: {"description": "Agreement created"}}})
-async def create_agreement(agreement_dto: AgreementDto):
+async def create_agreement(agreement_dto: AgreementDto) -> JSONResponse:
+    """
+    Создание договора
+    :param agreement_dto: данные договора
+    :return: 200 - договор создан, 400 - некорректный формат данных, 409 - договор уже существует
+    """
     product = (await repository.get_one_by_expression(ProductDao, ProductDao.code == agreement_dto.product_code))
     if not product:
         raise HTTPException(status_code=400, detail="Продукта с таким кодом не существует")
@@ -94,19 +117,20 @@ async def create_agreement(agreement_dto: AgreementDto):
     if not check_email(agreement_dto.email):
         raise HTTPException(status_code=400, detail="Некорректный формат email")
 
-    logging.warning(f"{product.min_principle} | {agreement_dto.disbursment_amount} | {product.max_principle}")
     if agreement_dto.disbursment_amount < product.min_principle or \
             agreement_dto.disbursment_amount > product.max_principle:
-        raise HTTPException(status_code=400, detail="Некорректная сумма выдачи")
+        raise HTTPException(status_code=400, detail=f"Некорректная сумма выдачи. Требуемый диапазон: от"
+                                                    f"{product.min_principle}\" до \"{product.max_principle}\"")
 
-    logging.warning(f"{product.min_term} | {agreement_dto.term} | {product.max_term}")
     if agreement_dto.term < product.min_term or \
             agreement_dto.term > product.max_term:
-        raise HTTPException(status_code=400, detail="Некорректный срок выдачи")
+        raise HTTPException(status_code=400,
+                            detail=f"Некорректный срок выдачи. Требуемый диапазон: от {product.min_term} до "
+                                   f"{product.max_term}")
 
     # проверить на существование клиента
-    client: ClientDao or None = await repository.get_one_by_expression(ClientDao,
-                                                                       ClientDao.passport_id == agreement_dto.passport_number)
+    client: ClientDao or None = await repository.get_one_by_expression(
+        ClientDao, ClientDao.passport_id == agreement_dto.passport_number)
     if not client:
         # Создать клиента
         try:

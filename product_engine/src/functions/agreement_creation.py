@@ -1,4 +1,3 @@
-import logging
 import random
 
 from dao.client import ClientDao
@@ -46,7 +45,6 @@ async def update_client(agreement_dto: AgreementDto, client_age: int, phone_numb
             client.patronymic != agreement_dto.third_name:
         raise ValueError("Некорректные ФИО клиента")
 
-    logging.warning(f"{client_age} | {client.age}")
     if client_age < 18:
         raise ValueError("Клиент несовершеннолетний")
 

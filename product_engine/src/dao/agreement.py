@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DECIMAL, TIMESTAMP
+from sqlalchemy import Column, Integer, String, DECIMAL
 from sqlalchemy.types import DateTime
 
 from controllers.session import Base
